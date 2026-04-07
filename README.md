@@ -1,0 +1,118 @@
+# Webhooks
+
+A monorepo for capturing and inspecting webhooks.
+
+## Tech Stack
+
+- **Monorepo**: Turborepo 2.x
+- **Package Manager**: pnpm 9.x
+- **Language**: TypeScript 5.9
+- **API**: Fastify 5.x with Zod
+- **Database**: PostgreSQL with Drizzle ORM
+- **Frontend**: React 19 + Vite 8
+- **Code Quality**: Biome (linting & formatting)
+
+## Project Structure
+
+```
+webhooks/
+├── apps/
+│   ├── api/          # Fastify API server
+│   └── web/          # React frontend
+├── packages/         # Shared packages
+│   └── env/          # Environment variables
+├── config/           # Shared configurations
+│   └── typescript/
+├── turbo.json        # Turborepo config
+├── biome.json        # Biome config
+└── pnpm-workspace.yaml
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm 9.x
+- PostgreSQL database
+
+### Installation
+
+```bash
+pnpm install
+```
+
+### Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/webhooks
+PORT=3333
+```
+
+### Development
+
+Run all apps in development mode:
+
+```bash
+pnpm dev
+```
+
+Run individual apps:
+
+```bash
+# API
+cd apps/api
+pnpm dev
+
+# Frontend
+cd apps/web
+pnpm dev
+```
+
+### Build
+
+```bash
+pnpm build
+```
+
+### Database Migrations
+
+```bash
+# Generate migration
+cd apps/api
+pnpm db:generate
+
+# Run migrations
+pnpm db:migrate
+
+# Open DB studio
+pnpm db:studio
+```
+
+## Code Quality
+
+```bash
+# Lint all packages
+pnpm lint
+
+# Fix lint issues
+pnpm lint:fix
+
+# Format code
+pnpm format
+
+# Check formatting
+pnpm format:check
+```
+
+## API Documentation
+
+When the API is running, visit:
+- Swagger UI: `http://localhost:3333/docs`
+- OpenAPI spec: `http://localhost:3333/json`
+
+## License
+
+ISC
