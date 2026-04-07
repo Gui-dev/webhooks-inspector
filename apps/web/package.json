@@ -13,12 +13,17 @@
     "format:check": "biome format ."
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.2.2",
+    "@tanstack/react-router": "^1.168.10",
+    "@tanstack/react-router-devtools": "^1.166.11",
+    "@webhooks/env": "workspace:*",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "@webhooks/env": "workspace:*"
+    "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.10",
+    "@tanstack/router-plugin": "^1.167.12",
     "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
