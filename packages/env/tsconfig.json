@@ -1,0 +1,4 @@
+{
+  "extends": "@webhooks/typescript/library.json",
+  "indlude": ["index.ts"]
+}
