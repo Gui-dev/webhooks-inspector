@@ -1,4 +1,14 @@
 {
   "root": false,
-  "extends": "//"
+  "extends": "//",
+
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "nursery": {
+        "useSortedClasses": "error"
+      }
+    }
+  }
 }

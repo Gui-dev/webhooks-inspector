@@ -17,8 +17,12 @@
     "@tanstack/react-router": "^1.168.10",
     "@tanstack/react-router-devtools": "^1.166.11",
     "@webhooks/env": "workspace:*",
+    "lucide-react": "^1.8.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-resizable-panels": "^4.9.0",
+    "tailwind-merge": "^3.5.0",
+    "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
