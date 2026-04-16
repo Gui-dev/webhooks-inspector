@@ -13,4 +13,8 @@ export class WebhooksRepository {
   public async listWebhooks(): Promise<WebhooksSelect[]> {
     return db.select().from(webhooks)
   }
+
+  public async deleteWebhook(id: string): Promise<void> {
+    await db.delete(webhooks).where(eq(webhooks.id, id))
+  }
 }

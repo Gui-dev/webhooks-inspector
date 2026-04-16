@@ -9,6 +9,7 @@ import {
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
+import { deleteWebhook } from './routes/delete-webhook.route'
 import { getWebhook } from './routes/get-webhook.route'
 import { listWebhook } from './routes/list-webhook.route'
 
@@ -39,6 +40,7 @@ app.register(ScalarApiReference, {
 
 app.register(listWebhook, { prefix: '/api' })
 app.register(getWebhook, { prefix: '/api' })
+app.register(deleteWebhook, { prefix: '/api' })
 
 app
   .listen({

@@ -6,4 +6,5 @@ export type WebhooksSelect = InferSelectModel<typeof webhooks>
 export interface IWebhooksContract {
   listWebhooks: () => Promise<WebhooksSelect[]>
   getWebhook: (id: string) => Promise<WebhooksSelect | undefined>
+  deleteWebhook: (id: string) => Promise<void>
 }
