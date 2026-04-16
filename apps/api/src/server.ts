@@ -9,6 +9,7 @@ import {
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
+import { getWebhook } from './routes/get-webhook.route'
 import { listWebhook } from './routes/list-webhook.route'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
@@ -37,6 +38,7 @@ app.register(ScalarApiReference, {
 })
 
 app.register(listWebhook, { prefix: '/api' })
+app.register(getWebhook, { prefix: '/api' })
 
 app
   .listen({
