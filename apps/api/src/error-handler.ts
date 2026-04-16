@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify'
 import { ZodError } from 'zod'
-import { BadRequestError } from './bad-request.error'
-import { NotFoundError } from './not-found.error'
+import { BadRequestError } from './_error/bad-request.error'
+import { NotFoundError } from './_error/not-found.error'
 
 type FastifyErrorHandler = FastifyInstance['errorHandler']
 

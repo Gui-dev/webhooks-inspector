@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "node --watch --import=tsx --env-file=../../.env src/server.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "db:generate": "dotenv -e ../../.env -- drizzle-kit generate",
     "db:migrate": "dotenv -e ../../.env -- drizzle-kit migrate",
     "db:studio": "dotenv -e ../../.env -- drizzle-kit studio"
@@ -21,6 +24,7 @@
     "drizzle-kit": "^0.31.10",
     "tsx": "^4.21.0",
     "typescript": "~5.9.3",
+    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^3.1.0"
   },
   "dependencies": {

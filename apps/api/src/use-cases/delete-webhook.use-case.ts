@@ -1,3 +1,4 @@
+import { NotFoundError } from '@/_error/not-found.error'
 import type { IWebhooksContract } from '@/contracts/webhooks.contract'
 
 export class DeleteWebhookUseCase {
@@ -7,7 +8,7 @@ export class DeleteWebhookUseCase {
     const webhook = await this.webhooksRepository.getWebhook(id)
 
     if (!webhook) {
-      throw new Error('Webhook not found')
+      throw new NotFoundError('Webhook not found')
     }
 
     await this.webhooksRepository.deleteWebhook(id)

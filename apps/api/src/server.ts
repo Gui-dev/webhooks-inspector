@@ -9,6 +9,7 @@ import {
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
+import { errorHandler } from './error-handler'
 import { deleteWebhook } from './routes/delete-webhook.route'
 import { getWebhook } from './routes/get-webhook.route'
 import { listWebhook } from './routes/list-webhook.route'
@@ -17,6 +18,8 @@ const app = fastify().withTypeProvider<ZodTypeProvider>()
 
 app.setSerializerCompiler(serializerCompiler)
 app.setValidatorCompiler(validatorCompiler)
+
+app.setErrorHandler(errorHandler)
 
 app.register(fastifyCors, {
   origin: true,

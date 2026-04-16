@@ -17,7 +17,6 @@ export const getWebhook: FastifyPluginAsyncZod = async app => {
         }),
         response: {
           200: createSelectSchema(webhooks),
-          404: z.object({ message: z.string() }),
         },
       },
     },
@@ -28,10 +27,6 @@ export const getWebhook: FastifyPluginAsyncZod = async app => {
       const getWebhookUseCase = new GetWebhookUseCase(webhookRepository)
 
       const webhook = await getWebhookUseCase.execute(id)
-
-      if (!webhook) {
-        return reply.status(404).send({ message: 'Webhook not found' })
-      }
 
       reply.status(200).send(webhook)
     }

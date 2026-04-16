@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest'
+import { NotFoundError } from '@/_error/not-found.error'
 import { WebhooksInMemoryRepository } from '../repositories/in-memory-repository/webhooks.in-memory.repository.js'
 import { GetWebhookUseCase } from './get-webhook.use-case.js'
 
@@ -36,7 +37,7 @@ describe('GetWebhookUseCase', () => {
     expect(result?.pathname).toBe('/webhook/test')
   })
 
-  it('should throw error when webhook not found', async () => {
-    await expect(sut.execute('non-existent-id')).rejects.toThrow('Webhook not found')
+  it('should throw NotFoundError when webhook not found', async () => {
+    await expect(sut.execute('non-existent-id')).rejects.toThrow(NotFoundError)
   })
 })
