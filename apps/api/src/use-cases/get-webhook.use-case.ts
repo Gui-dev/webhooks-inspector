@@ -1,4 +1,5 @@
 import type { IWebhooksContract, WebhooksSelect } from '@/contracts/webhooks.contract'
+import { NotFoundError } from '@/errors/not-found.error'
 
 export class GetWebhookUseCase {
   constructor(private readonly webhooksRepository: IWebhooksContract) {}
@@ -7,7 +8,7 @@ export class GetWebhookUseCase {
     const webhook = await this.webhooksRepository.getWebhook(id)
 
     if (!webhook) {
-      throw new Error('Webhook not found')
+      throw new NotFoundError('Webhook not found')
     }
 
     return webhook
