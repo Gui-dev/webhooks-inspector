@@ -1,7 +1,11 @@
-import { eq } from 'drizzle-orm'
+import { desc, eq, lt } from 'drizzle-orm'
 import { db } from '@/db'
 import { webhooks } from '@/db/schema'
-import type { WebhooksSelect } from '../contracts/webhooks.contract'
+import type {
+  IListWebhooksParams,
+  IListWebhooksResponse,
+  WebhooksSelect,
+} from '../contracts/webhooks.contract'
 
 export class WebhooksRepository {
   public async getWebhook(id: string): Promise<WebhooksSelect | undefined> {
@@ -10,8 +14,23 @@ export class WebhooksRepository {
     return webhook
   }
 
-  public async listWebhooks(): Promise<WebhooksSelect[]> {
-    return db.select().from(webhooks)
+  public async listWebhooks({
+    limit,
+    cursor,
+  }: IListWebhooksParams): Promise<IListWebhooksResponse[]> {
+    const result = await db
+      .select({
+        id: webhooks.id,
+        method: webhooks.method,
+        pathname: webhooks.pathname,
+        createdAt: webhooks.createdAt,
+      })
+      .from(webhooks)
+      .where(cursor ? lt(webhooks.id, cursor) : undefined)
+      .orderBy(desc(webhooks.id))
+      .limit(limit + 1)
+
+    return result
   }
 
   public async deleteWebhook(id: string): Promise<void> {

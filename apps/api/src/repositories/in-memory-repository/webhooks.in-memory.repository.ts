@@ -1,4 +1,8 @@
-import type { WebhooksSelect } from '@/contracts/webhooks.contract'
+import type {
+  IListWebhooksParams,
+  IListWebhooksResponse,
+  WebhooksSelect,
+} from '@/contracts/webhooks.contract'
 
 export class WebhooksInMemoryRepository {
   private webhooks = new Map<string, WebhooksSelect>()
@@ -7,8 +11,20 @@ export class WebhooksInMemoryRepository {
     return this.webhooks.get(id)
   }
 
-  public async listWebhooks(): Promise<WebhooksSelect[]> {
-    return Array.from(this.webhooks.values())
+  public async listWebhooks({
+    limit,
+    cursor,
+  }: IListWebhooksParams): Promise<IListWebhooksResponse[]> {
+    const all = Array.from(this.webhooks.values()).sort((a, b) => b.id.localeCompare(a.id))
+
+    const filtered = cursor ? all.filter(w => w.id < cursor) : all
+
+    return filtered.slice(0, limit).map(w => ({
+      id: w.id,
+      method: w.method,
+      pathname: w.pathname,
+      createdAt: w.createdAt,
+    }))
   }
 
   public async deleteWebhook(_id: string): Promise<void> {
