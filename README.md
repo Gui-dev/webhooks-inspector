@@ -11,6 +11,7 @@ A monorepo for capturing and inspecting webhooks.
 - **Database**: PostgreSQL with Drizzle ORM
 - **Frontend**: React 19 + Vite 8
 - **Code Quality**: Biome (linting & formatting)
+- **Testing**: Vitest
 
 ## Project Structure
 
@@ -27,6 +28,33 @@ webhooks/
 ├── biome.json        # Biome config
 └── pnpm-workspace.yaml
 ```
+
+## Features
+
+### API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/webhooks` | List all webhooks (paginated) |
+| GET | `/api/webhooks/:id` | Get a specific webhook |
+| DELETE | `/api/webhooks/:id` | Delete a webhook |
+| POST | `/capture/*` | Capture incoming webhooks |
+
+### Architecture
+
+The API follows **Hexagonal Architecture** pattern:
+
+- **Routes**: `apps/api/src/routes/`
+- **Use Cases**: `apps/api/src/use-cases/`
+- **Repositories**: `apps/api/src/repositories/`
+- **Contracts**: `apps/api/src/contracts/`
+- **Errors**: `apps/api/src/_error/`
+
+### Implemented Use Cases
+
+- `GetWebhookUseCase` - Retrieve a single webhook by ID
+- `DeleteWebhookUseCase` - Delete a webhook by ID
+- `ListWebhooksUseCase` - List webhooks with pagination support
 
 ## Getting Started
 
@@ -89,6 +117,20 @@ pnpm db:migrate
 
 # Open DB studio
 pnpm db:studio
+```
+
+### Testing
+
+```bash
+# Run all tests
+cd apps/api
+pnpm test
+
+# Run tests in watch mode
+pnpm test:watch
+
+# Run tests with coverage
+pnpm test:coverage
 ```
 
 ## Code Quality
