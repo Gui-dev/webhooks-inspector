@@ -5,24 +5,24 @@ import { describe, expect, it, vi } from 'vitest'
 import { IconButton } from './icon-button'
 
 describe('IconButton', () => {
-  it('renderiza o ícone fornecido', () => {
+  it('renders provided icon', () => {
     render(<IconButton icon={<Trash2 data-testid="icon" />} />)
     expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
 
-  it('aplica variante de tamanho small', () => {
+  it('applies small size variant', () => {
     const { container } = render(<IconButton icon={<Trash2 />} size="sm" />)
     const button = container.querySelector('button')
     expect(button).toHaveClass('size-6')
   })
 
-  it('aplica variante de tamanho large', () => {
+  it('applies large size variant', () => {
     const { container } = render(<IconButton icon={<Trash2 />} size="lg" />)
     const button = container.querySelector('button')
     expect(button).toHaveClass('size-10')
   })
 
-  it('dispara onClick ao clicar', async () => {
+  it('triggers onClick on click', async () => {
     const user = userEvent.setup()
     const onClick = vi.fn()
     render(<IconButton icon={<Trash2 />} onClick={onClick} />)
@@ -31,13 +31,13 @@ describe('IconButton', () => {
     expect(onClick).toHaveBeenCalled()
   })
 
-  it('tem tipo button padrão', () => {
+  it('has default button type', () => {
     const { container } = render(<IconButton icon={<Trash2 />} />)
     const button = container.querySelector('button')
     expect(button).toHaveAttribute('type', 'button')
   })
 
-  it('aplica tamanho médio por padrão', () => {
+  it('applies medium size by default', () => {
     const { container } = render(<IconButton icon={<Trash2 />} />)
     const button = container.querySelector('button')
     expect(button).toHaveClass('size-8')

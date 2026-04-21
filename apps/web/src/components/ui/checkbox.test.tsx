@@ -4,17 +4,17 @@ import { describe, expect, it, vi } from 'vitest'
 import { Checkbox } from './checkbox'
 
 describe('Checkbox', () => {
-  it('renderiza sem quebrar', () => {
+  it('renders without crashing', () => {
     const { container } = render(<Checkbox />)
     expect(container.firstChild).toBeInTheDocument()
   })
 
-  it('renderiza com role checkbox', () => {
+  it('renders with checkbox role', () => {
     render(<Checkbox />)
     expect(screen.getByRole('checkbox')).toBeInTheDocument()
   })
 
-  it('chama onCheckedChange ao clicar', async () => {
+  it('calls onCheckedChange on click', async () => {
     const user = userEvent.setup()
     const onCheckedChange = vi.fn()
     render(<Checkbox onCheckedChange={onCheckedChange} />)
@@ -23,12 +23,12 @@ describe('Checkbox', () => {
     expect(onCheckedChange).toHaveBeenCalledWith(true)
   })
 
-  it('é unchecked por padrão', () => {
+  it('is unchecked by default', () => {
     render(<Checkbox />)
     expect(screen.getByRole('checkbox')).not.toBeChecked()
   })
 
-  it('mostra estado checked após clicar', async () => {
+  it('shows checked state after click', async () => {
     const user = userEvent.setup()
     render(<Checkbox />)
 
