@@ -83,7 +83,7 @@ function generateStripePayload(eventType: StripeEvent, customerId: string) {
       object: generateEventData(eventType, customerId),
     },
   }
-  return JSON.stringify(object)
+  return JSON.stringify(object, null, 2)
 }
 
 function generateEventData(eventType: StripeEvent, customerId: string) {
@@ -214,6 +214,8 @@ function generateEventData(eventType: StripeEvent, customerId: string) {
 
 async function seed() {
   console.log('🌱 Seeding database...')
+
+  await db.delete(webhooks)
 
   const webhookData = Array.from({ length: 60 }, () => {
     const eventType = faker.helpers.arrayElement(STRIPE_EVENTS)
