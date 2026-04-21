@@ -1,4 +1,5 @@
 import type {
+  ICaptureWebhookProps,
   IListWebhooksParams,
   IListWebhooksResponse,
   WebhooksSelect,
@@ -33,5 +34,25 @@ export class WebhooksInMemoryRepository {
 
   public add(webhook: WebhooksSelect): void {
     this.webhooks.set(webhook.id, webhook)
+  }
+
+  public async captureWebhook(props: ICaptureWebhookProps): Promise<WebhooksSelect[]> {
+    const webhook: WebhooksSelect = {
+      id: crypto.randomUUID(),
+      method: props.method,
+      ip: props.ip,
+      pathname: props.pathname,
+      statusCode: props.statusCode ?? 200,
+      contentType: props.contentType ?? null,
+      contentLength: props.contentLength ?? null,
+      queryParams: props.queryParams ?? null,
+      headers: props.headers,
+      body: props.body ?? null,
+      createdAt: new Date(),
+    }
+
+    this.webhooks.set(webhook.id, webhook)
+
+    return [webhook]
   }
 }

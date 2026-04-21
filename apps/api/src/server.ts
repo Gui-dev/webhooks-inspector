@@ -10,6 +10,7 @@ import {
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
 import { errorHandler } from './error-handler'
+import { captureWebhook } from './routes/capture.webhook.route'
 import { deleteWebhook } from './routes/delete-webhook.route'
 import { getWebhook } from './routes/get-webhook.route'
 import { listWebhook } from './routes/list-webhook.route'
@@ -44,6 +45,7 @@ app.register(ScalarApiReference, {
 app.register(listWebhook, { prefix: '/api' })
 app.register(getWebhook, { prefix: '/api' })
 app.register(deleteWebhook, { prefix: '/api' })
+app.register(captureWebhook, { prefix: '/api' })
 
 app
   .listen({
