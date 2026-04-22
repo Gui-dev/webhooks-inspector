@@ -24,7 +24,13 @@ export const captureWebhook: FastifyPluginAsyncZod = async app => {
       const contentLength = request.headers['content-length']
         ? Number(request.headers['content-length'])
         : null
-      const pathname = new URL(request.url).pathname.replace('/capture', '')
+      const pathname = (() => {
+        const url = request.url
+        if (url.startsWith('/')) {
+          return url.split('?')[0].replace('/capture', '')
+        }
+        return new URL(url).pathname.replace('/capture', '')
+      })()
       const headers = Object.fromEntries(
         Object.entries(request.headers).map(([key, value]) => [
           key,
