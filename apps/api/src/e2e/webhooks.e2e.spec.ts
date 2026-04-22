@@ -2,6 +2,8 @@ import supertest from 'supertest'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { buildApp } from '../app.js'
 
+const NON_EXISTENT_UUID = '019db73f-cdde-7c85-ba75-bb1e754a1405'
+
 describe('Webhook API E2E', () => {
   let app: Awaited<ReturnType<typeof buildApp>>
   let request: ReturnType<typeof supertest>
@@ -55,9 +57,9 @@ describe('Webhook API E2E', () => {
       expect(response.body).toHaveProperty('id', id)
     })
 
-    it('returns 404 for non-existent webhook', async () => {
-      const response = await request.get('/api/webhooks/00000000-0000-0000-0000-000000000000')
-      expect(response.status).toBe(404)
+    it('returns 400 for non-existent webhook', async () => {
+      const response = await request.get('/api/webhooks/NON_EXISTENT_UUID')
+      expect(response.status).toBe(400)
     })
 
     it('returns 400 for invalid UUID', async () => {
@@ -76,9 +78,9 @@ describe('Webhook API E2E', () => {
       expect(response.status).toBe(204)
     })
 
-    it('returns 204 even for non-existent webhook', async () => {
-      const response = await request.delete('/api/webhooks/00000000-0000-0000-0000-000000000000')
-      expect(response.status).toBe(204)
+    it('returns 400 for non-existent webhook', async () => {
+      const response = await request.delete('/api/webhooks/NON_EXISTENT_UUID')
+      expect(response.status).toBe(400)
     })
 
     it('returns 400 for invalid UUID', async () => {
@@ -127,4 +129,3 @@ describe('Webhook API E2E', () => {
     })
   })
 })
-

@@ -25,6 +25,12 @@ export const errorHandler: FastifyErrorHandler = (error, _request, reply) => {
     })
   }
 
+  if (error.validation || error.statusCode === 400) {
+    return reply.status(400).send({
+      message: error.message,
+    })
+  }
+
   console.log('ERROR_500: ', error)
 
   return reply.status(500).send({
