@@ -1,5 +1,5 @@
-import { buildApp } from './app.js'
 import { env } from '@webhooks/env'
+import { buildApp } from './app.js'
 
 buildApp()
   .then(app => {
