@@ -1,5 +1,5 @@
-import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import supertest from 'supertest'
+import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { buildApp } from '../app.js'
 
 describe('Webhook API E2E', () => {
@@ -89,9 +89,7 @@ describe('Webhook API E2E', () => {
 
   describe('POST /api/capture/*', () => {
     it('returns 200 with id for POST request', async () => {
-      const response = await request
-        .post('/api/capture/test-webhook')
-        .send({ test: 'data' })
+      const response = await request.post('/api/capture/test-webhook').send({ test: 'data' })
       expect(response.status).toBe(200)
       expect(response.body).toHaveProperty('id')
     })
@@ -124,9 +122,9 @@ describe('Webhook API E2E', () => {
     })
 
     it('captures request with query params', async () => {
-      const response = await request
-        .post('/api/capture/test-query?foo=bar&baz=qux')
+      const response = await request.post('/api/capture/test-query?foo=bar&baz=qux')
       expect(response.status).toBe(200)
     })
   })
 })
+
