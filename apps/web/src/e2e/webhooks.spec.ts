@@ -1,12 +1,9 @@
 import { expect, test } from '@playwright/test'
-import { WebhookDetailsPage } from '../page-objects/webhook-details.page'
-import { WebhooksListPage } from '../page-objects/webhooks-list.page'
 
 test.describe('Webhooks List', () => {
   test('displays page heading', async ({ page }) => {
-    const webhooksList = new WebhooksListPage(page)
-    await webhooksList.goto()
-    await webhooksList.expectLoaded()
+    await page.goto('/')
+    await expect(page.getByRole('heading', { name: /webhooks/i })).toBeVisible()
   })
 
   test('shows loading state while fetching', async ({ page }) => {
@@ -15,21 +12,19 @@ test.describe('Webhooks List', () => {
   })
 
   test('displays webhooks after load', async ({ page }) => {
-    const webhooksList = new WebhooksListPage(page)
-    await webhooksList.goto()
+    await page.goto('/')
     await expect(page.getByTestId('webhooks-skeleton')).not.toBeVisible()
-    await expect(webhooksList.webhooks).toBeVisible()
+    await expect(page.getByTestId('webhooks-list')).toBeVisible()
   })
 })
 
 test.describe('Navigation', () => {
   test('navigates to webhook details on click', async ({ page }) => {
-    const webhooksList = new WebhooksListPage(page)
-    await webhooksList.goto()
+    await page.goto('/')
 
-    await expect(webhooksList.webhooks).toBeVisible()
+    await expect(page.getByTestId('webhooks-list')).toBeVisible()
 
-    const firstWebhook = webhooksList.webhookItems.first()
+    const firstWebhook = page.getByTestId('webhook-item').first()
     await firstWebhook.click()
 
     await expect(page).toHaveURL(/\/webhooks\/.+/)
@@ -49,10 +44,8 @@ test.describe('Webhook Details', () => {
   })
 
   test('delete button is visible', async ({ page }) => {
-    const detailsPage = new WebhookDetailsPage(page)
-    await detailsPage.goto('test-webhook-id')
-
-    await detailsPage.expectLoaded()
-    await expect(detailsPage.deleteButton).toBeVisible()
+    await page.goto('/webhooks/test-id')
+    await expect(page.getByTestId('webhook-method')).toBeVisible()
+    await expect(page.getByRole('button', { name: /delete/i })).toBeVisible()
   })
 })
