@@ -1,5 +1,5 @@
 import { render, waitFor } from '@testing-library/react'
-import { describe, expect, it, vi, beforeEach } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { CodeBlock } from './code-block'
 
 const mockCodeToHtml = vi.fn().mockResolvedValue('<pre><code>parsed code</code></pre>')
@@ -14,21 +14,27 @@ describe('CodeBlock', () => {
     mockCodeToHtml.mockResolvedValue('<pre><code>parsed code</code></pre>')
   })
 
-  it('renders without crashing', () => {
+  it('renders without crashing', async () => {
     const { container } = render(<CodeBlock code="test code" />)
-    expect(container.firstChild).toBeInTheDocument()
+    await waitFor(() => {
+      expect(container.firstChild).toBeInTheDocument()
+    })
   })
 
-  it('renders with default CSS classes', () => {
+  it('renders with default CSS classes', async () => {
     const { container } = render(<CodeBlock code="test code" />)
-    const div = container.firstChild as HTMLElement
-    expect(div).toHaveClass('relative', 'rounded-lg', 'border', 'border-zinc-700')
+    await waitFor(() => {
+      const div = container.firstChild as HTMLElement
+      expect(div).toHaveClass('relative', 'rounded-lg', 'border', 'border-zinc-700')
+    })
   })
 
-  it('accepts custom className', () => {
+  it('accepts custom className', async () => {
     const { container } = render(<CodeBlock code="test" className="custom-class" />)
-    const div = container.firstChild as HTMLElement
-    expect(div).toHaveClass('custom-class')
+    await waitFor(() => {
+      const div = container.firstChild as HTMLElement
+      expect(div).toHaveClass('custom-class')
+    })
   })
 
   it('calls codeToHtml with default json language', async () => {
@@ -53,13 +59,17 @@ describe('CodeBlock', () => {
     })
   })
 
-  it('renders container even with empty code', () => {
+  it('renders container even with empty code', async () => {
     const { container } = render(<CodeBlock code="" />)
-    expect(container.firstChild).toBeInTheDocument()
+    await waitFor(() => {
+      expect(container.firstChild).toBeInTheDocument()
+    })
   })
 
-  it('passes additional props to container', () => {
+  it('passes additional props to container', async () => {
     const { container } = render(<CodeBlock code="test" data-testid="code-block" />)
-    expect(container.firstChild).toHaveAttribute('data-testid', 'code-block')
+    await waitFor(() => {
+      expect(container.firstChild).toHaveAttribute('data-testid', 'code-block')
+    })
   })
 })
