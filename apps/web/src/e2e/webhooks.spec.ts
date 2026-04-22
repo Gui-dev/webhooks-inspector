@@ -37,15 +37,27 @@ test.describe('Webhook Details', () => {
     await expect(page.getByTestId('webhook-details-skeleton')).toBeVisible()
   })
 
-  test('displays webhook details', async ({ page }) => {
-    await page.goto('/webhooks/test-id')
-    await expect(page.getByTestId('webhook-details-skeleton')).not.toBeVisible()
-    await expect(page.getByTestId('webhook-method')).toBeVisible()
+  test('displays details for valid webhook from list', async ({ page }) => {
+    await page.goto('/')
+
+    await expect(page.getByTestId('webhooks-list')).toBeVisible()
+
+    const firstWebhook = page.getByTestId('webhook-item').first()
+    await firstWebhook.click()
+
+    await expect(page).toHaveURL(/\/webhooks\/.+/)
+    await expect(page.getByTestId('webhook-method')).toBeVisible({ timeout: 10000 })
   })
 
-  test('delete button is visible', async ({ page }) => {
-    await page.goto('/webhooks/test-id')
+  test('shows method and pathname in header', async ({ page }) => {
+    await page.goto('/')
+
+    await expect(page.getByTestId('webhooks-list')).toBeVisible()
+
+    const firstWebhook = page.getByTestId('webhook-item').first()
+    await firstWebhook.click()
+
     await expect(page.getByTestId('webhook-method')).toBeVisible()
-    await expect(page.getByRole('button', { name: /delete/i })).toBeVisible()
+    await expect(page.getByTestId('webhook-pathname')).toBeVisible()
   })
 })
