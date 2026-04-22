@@ -47,7 +47,7 @@ export const WebhooksListItem = ({ webhook }: IWebhooksListItemProps) => {
             <p className="truncate font-mono text-xs text-zinc-200 leading-tight">
               {webhook.pathname}
             </p>
-            <p className="texti-zinc-500 mt-1 font-medium text-xs">
+            <p className="mt-1 font-medium text-xs text-zinc-500">
               {dayjs(webhook.createdAt).fromNow()}
             </p>
           </div>

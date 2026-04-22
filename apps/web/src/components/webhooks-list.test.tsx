@@ -13,14 +13,26 @@ const renderWithQuery = (ui: React.ReactElement) => {
 describe('WebhooksList', () => {
   beforeEach(() => {
     vi.resetAllMocks()
+    vi.stubGlobal(
+      'IntersectionObserver',
+      vi.fn().mockImplementation(() => ({
+        observe: vi.fn(),
+        disconnect: vi.fn(),
+        unobserve: vi.fn(),
+      }))
+    )
   })
 
-  it('renders container with correct classes on empty list', async () => {
+  it('renders container with correct classes', async () => {
     vi.stubGlobal(
       'fetch',
       vi.fn().mockResolvedValue({
         ok: true,
-        json: () => Promise.resolve({ webhooks: [], nextCursor: null }),
+        json: () =>
+          Promise.resolve({
+            webhooks: [],
+            nextCursor: null,
+          }),
       })
     )
 
@@ -34,14 +46,20 @@ describe('WebhooksList', () => {
   it('fetches correct endpoint', async () => {
     const fetchSpy = vi.fn().mockResolvedValue({
       ok: true,
-      json: () => Promise.resolve({ webhooks: [], nextCursor: null }),
+      json: () =>
+        Promise.resolve({
+          webhooks: [],
+          nextCursor: null,
+        }),
     })
     vi.stubGlobal('fetch', fetchSpy)
 
     renderWithQuery(<WebhooksList />)
 
     await waitFor(() => {
-      expect(fetchSpy).toHaveBeenCalledWith('http://localhost:3333/api/webhooks')
+      expect(fetchSpy).toHaveBeenCalled()
+      const calledUrl = fetchSpy.mock.calls[0][0] as URL
+      expect(calledUrl.pathname).toBe('/api/webhooks')
     })
   })
 })

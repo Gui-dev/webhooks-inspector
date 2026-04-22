@@ -1,8 +1,8 @@
 import { Copy } from 'lucide-react'
 import { Suspense } from 'react'
+import { WebhooksListSkeleton } from './skeletons'
 import { IconButton } from './ui/icon-button'
 import { WebhooksList } from './webhooks-list'
-import { WebhooksListSkeleton } from './skeletons'
 
 export const Sidebar = () => {
   return (
