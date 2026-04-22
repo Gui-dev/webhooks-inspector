@@ -35,7 +35,7 @@ export const WebhookDetails = ({ id }: IWebhookDetailsProps) => {
   })
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col" data-testid="webhook-details">
       <WebhookDetailHeader
         method={data.method}
         pathname={data.pathname}

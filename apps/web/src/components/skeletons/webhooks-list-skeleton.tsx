@@ -17,7 +17,11 @@ const SKELETON_KEYS = [
 
 export const WebhooksListSkeleton = ({ className, ...props }: IWebhooksListSkeletonProps) => {
   return (
-    <div className={twMerge('flex h-full flex-col', className)} {...props}>
+    <div
+      className={twMerge('flex h-full flex-col', className)}
+      data-testid="webhooks-skeleton"
+      {...props}
+    >
       <div className="flex h-full animate-pulse flex-col gap-4 p-6">
         {SKELETON_KEYS.map(key => (
           <div key={key} className="flex items-center gap-4">

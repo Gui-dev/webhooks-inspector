@@ -56,7 +56,7 @@ export const WebhooksList = () => {
   }, [isFetchingNextPage, hasNextPage, fetchNextPage])
 
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto" data-testid="webhooks-list">
       <div className="space-y-1 p-2">
         {webhooks.map(webhook => {
           return <WebhooksListItem key={webhook.id} webhook={webhook} />

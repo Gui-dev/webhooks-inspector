@@ -27,7 +27,11 @@ const SkeletonTable = ({ rows = 4 }: { rows?: number }) => {
 
 export const WebhookDetailsSkeleton = ({ className, ...props }: IWebhookDetailsSkeletonProps) => {
   return (
-    <div className={twMerge('flex h-full flex-col', className)} {...props}>
+    <div
+      className={twMerge('flex h-full flex-col', className)}
+      data-testid="webhook-details-skeleton"
+      {...props}
+    >
       <div className="space-y-4 border-zinc-700 border-b p-6">
         <div className="flex items-center gap-3">
           <div className="h-6 w-14 animate-pulse rounded bg-zinc-800/50" />

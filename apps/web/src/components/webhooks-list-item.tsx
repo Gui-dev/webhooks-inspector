@@ -32,7 +32,10 @@ export const WebhooksListItem = ({ webhook }: IWebhooksListItemProps) => {
     },
   })
   return (
-    <div className="group rounded-lg transition-colors duration-150 hover:bg-zinc-700/30">
+    <div
+      className="group rounded-lg transition-colors duration-150 hover:bg-zinc-700/30"
+      data-testid="webhook-item"
+    >
       <div className="flex items-start gap-3 px-4 py-2.5">
         <Checkbox />
         <Link
