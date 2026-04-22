@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
-import { WebhookDetailsPage } from './page-objects/webhook-details.page'
-import { WebhooksListPage } from './page-objects/webhooks-list.page'
+import { WebhookDetailsPage } from '../page-objects/webhook-details.page'
+import { WebhooksListPage } from '../page-objects/webhooks-list.page'
 
 test.describe('Webhooks List', () => {
   test('displays page heading', async ({ page }) => {
