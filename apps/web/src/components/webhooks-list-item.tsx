@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -17,6 +18,19 @@ interface IWebhooksListItemProps {
 }
 
 export const WebhooksListItem = ({ webhook }: IWebhooksListItemProps) => {
+  const queryClient = useQueryClient()
+  const { mutate: deleteWebhook } = useMutation({
+    mutationFn: async (id: string) => {
+      await fetch(`http://localhost:3333/api/webhooks/${id}`, {
+        method: 'DELETE',
+      })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['webhooks'],
+      })
+    },
+  })
   return (
     <div className="group rounded-lg transition-colors duration-150 hover:bg-zinc-700/30">
       <div className="flex items-start gap-3 px-4 py-2.5">
@@ -33,7 +47,7 @@ export const WebhooksListItem = ({ webhook }: IWebhooksListItemProps) => {
             <p className="truncate font-mono text-xs text-zinc-200 leading-tight">
               {webhook.pathname}
             </p>
-            <p className="mt-1 font-medium text-xs text-zinc-500">
+            <p className="texti-zinc-500 mt-1 font-medium text-xs">
               {dayjs(webhook.createdAt).fromNow()}
             </p>
           </div>
@@ -41,6 +55,7 @@ export const WebhooksListItem = ({ webhook }: IWebhooksListItemProps) => {
         <IconButton
           icon={<Trash2Icon className="size-3.5 text-zinc-400" />}
           className="opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+          onClick={() => deleteWebhook(webhook.id)}
         />
       </div>
     </div>
