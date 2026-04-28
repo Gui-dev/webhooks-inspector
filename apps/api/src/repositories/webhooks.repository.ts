@@ -1,4 +1,4 @@
-import { desc, eq, lt } from 'drizzle-orm'
+import { desc, eq, inArray, lt } from 'drizzle-orm'
 import { db } from '@/db'
 import { webhooks } from '@/db/schema'
 import type {
@@ -13,6 +13,12 @@ export class WebhooksRepository {
     const [webhook] = await db.select().from(webhooks).where(eq(webhooks.id, id)).limit(1)
 
     return webhook
+  }
+
+  public async getManyWebhooksById(ids: string[]): Promise<WebhooksSelect[]> {
+    const result = await db.select().from(webhooks).where(inArray(webhooks.id, ids))
+
+    return result
   }
 
   public async listWebhooks({

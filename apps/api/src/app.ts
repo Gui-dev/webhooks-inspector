@@ -11,6 +11,7 @@ import {
 import { errorHandler } from './error-handler'
 import { captureWebhook } from './routes/capture.webhook.route'
 import { deleteWebhook } from './routes/delete-webhook.route'
+import { generateHandler } from './routes/generate-handler.route'
 import { getWebhook } from './routes/get-webhook.route'
 import { listWebhook } from './routes/list-webhook.route'
 
@@ -46,6 +47,7 @@ export async function buildApp() {
   app.register(getWebhook, { prefix: '/api' })
   app.register(deleteWebhook, { prefix: '/api' })
   app.register(captureWebhook, { prefix: '/api' })
+  app.register(generateHandler, { prefix: '/api' })
 
   return app
 }

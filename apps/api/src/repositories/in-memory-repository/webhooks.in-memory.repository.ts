@@ -32,6 +32,10 @@ export class WebhooksInMemoryRepository {
     this.webhooks.delete(_id)
   }
 
+  public async getManyWebhooksById(ids: string[]): Promise<WebhooksSelect[]> {
+    return ids.map(id => this.webhooks.get(id)).filter((w): w is WebhooksSelect => w !== undefined)
+  }
+
   public add(webhook: WebhooksSelect): void {
     this.webhooks.set(webhook.id, webhook)
   }

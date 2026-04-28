@@ -2,7 +2,7 @@ import supertest from 'supertest'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { buildApp } from '../app.js'
 
-const NON_EXISTENT_UUID = '019db73f-cdde-7c85-ba75-bb1e754a1405'
+const _NON_EXISTENT_UUID = '019db73f-cdde-7c85-ba75-bb1e754a1405'
 
 describe('Webhook API E2E', () => {
   let app: Awaited<ReturnType<typeof buildApp>>

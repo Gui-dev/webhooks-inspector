@@ -30,6 +30,7 @@ export interface ICaptureWebhookProps {
 export interface IWebhooksContract {
   listWebhooks: (params: IListWebhooksParams) => Promise<IListWebhooksResponse[]>
   getWebhook: (id: string) => Promise<WebhooksSelect | undefined>
+  getManyWebhooksById: (ids: string[]) => Promise<WebhooksSelect[]>
   deleteWebhook: (id: string) => Promise<void>
   captureWebhook: (props: ICaptureWebhookProps) => Promise<WebhooksSelect[]>
 }
