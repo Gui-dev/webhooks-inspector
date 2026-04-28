@@ -37,7 +37,9 @@ webhooks/
 |--------|----------|-------------|
 | GET | `/api/webhooks` | List all webhooks (paginated) |
 | GET | `/api/webhooks/:id` | Get a specific webhook |
+| POST | `/api/webhooks` | Create a new webhook |
 | DELETE | `/api/webhooks/:id` | Delete a webhook |
+| GET | `/api/webhooks/:id/generate-handler` | Generate handler code |
 | POST | `/capture/*` | Capture incoming webhooks |
 
 ### Architecture
@@ -55,6 +57,8 @@ The API follows **Hexagonal Architecture** pattern:
 - `GetWebhookUseCase` - Retrieve a single webhook by ID
 - `DeleteWebhookUseCase` - Delete a webhook by ID
 - `ListWebhooksUseCase` - List webhooks with pagination support
+- `CreateWebhookUseCase` - Create a new webhook
+- `GenerateHandlerUseCase` - Generate handler code for a webhook
 
 ## Getting Started
 
@@ -122,15 +126,17 @@ pnpm db:studio
 ### Testing
 
 ```bash
-# Run all tests
+# Run API tests
 cd apps/api
 pnpm test
 
-# Run tests in watch mode
-pnpm test:watch
+# Run web tests
+cd apps/web
+pnpm test
 
-# Run tests with coverage
-pnpm test:coverage
+# Run e2e tests
+cd apps/web
+pnpm test:e2e
 ```
 
 ## Code Quality
@@ -154,6 +160,12 @@ pnpm format:check
 When the API is running, visit:
 - Swagger UI: `http://localhost:3333/docs`
 - OpenAPI spec: `http://localhost:3333/json`
+
+## Screenshots
+
+<!-- Add your project screenshots here -->
+
+![Webhooks Dashboard](./docs/screenshots/webhooks-dashboard.png)
 
 ## License
 
