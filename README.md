@@ -170,8 +170,6 @@ When the API is running, visit:
 - Swagger UI: `http://localhost:3333/docs`
 - OpenAPI spec: `http://localhost:3333/json`
 
-![Webhooks Dashboard](./docs/screenshots/webhooks-dashboard.png)
-
 ## License
 
 ISC
