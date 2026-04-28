@@ -2,6 +2,15 @@
 
 A monorepo for capturing and inspecting webhooks.
 
+## Screenshots
+
+![Webhooks Home](./docs/screenshots/home.png)
+
+![Webhooks Selected](./docs/screenshots/button.png)
+
+![Webhooks Generate](./docs/screenshots/ia-generate.png)
+
+
 ## Tech Stack
 
 - **Monorepo**: Turborepo 2.x
@@ -160,10 +169,6 @@ pnpm format:check
 When the API is running, visit:
 - Swagger UI: `http://localhost:3333/docs`
 - OpenAPI spec: `http://localhost:3333/json`
-
-## Screenshots
-
-<!-- Add your project screenshots here -->
 
 ![Webhooks Dashboard](./docs/screenshots/webhooks-dashboard.png)
 

@@ -2,3 +2,5 @@ node_modules
 dist
 .env
 .worktrees
+playwright-report
+test-results
