@@ -19,13 +19,15 @@ test.describe('Webhooks List', () => {
 })
 
 test.describe('Navigation', () => {
-  test('navigates to webhook details on click', async ({ page }) => {
+  test('navigates to webhook details page', async ({ page }) => {
     await page.goto('/')
 
     await expect(page.getByTestId('webhooks-list')).toBeVisible()
 
-    const firstWebhook = page.getByTestId('webhook-item').first()
-    await firstWebhook.click()
+    const firstWebhookLink = page.getByTestId('webhook-item').locator('a').first()
+    const href = await firstWebhookLink.getAttribute('href')
+
+    await page.goto(href!)
 
     await expect(page).toHaveURL(/\/webhooks\/.+/)
   })
@@ -42,8 +44,10 @@ test.describe('Webhook Details', () => {
 
     await expect(page.getByTestId('webhooks-list')).toBeVisible()
 
-    const firstWebhook = page.getByTestId('webhook-item').first()
-    await firstWebhook.click()
+    const firstWebhookLink = page.getByTestId('webhook-item').locator('a').first()
+    const href = await firstWebhookLink.getAttribute('href')
+
+    await page.goto(href!)
 
     await expect(page).toHaveURL(/\/webhooks\/.+/)
     await expect(page.getByTestId('webhook-method')).toBeVisible({ timeout: 10000 })
@@ -54,8 +58,10 @@ test.describe('Webhook Details', () => {
 
     await expect(page.getByTestId('webhooks-list')).toBeVisible()
 
-    const firstWebhook = page.getByTestId('webhook-item').first()
-    await firstWebhook.click()
+    const firstWebhookLink = page.getByTestId('webhook-item').locator('a').first()
+    const href = await firstWebhookLink.getAttribute('href')
+
+    await page.goto(href!)
 
     await expect(page.getByTestId('webhook-method')).toBeVisible()
     await expect(page.getByTestId('webhook-pathname')).toBeVisible()

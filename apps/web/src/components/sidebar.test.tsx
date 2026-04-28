@@ -50,13 +50,13 @@ describe('Sidebar', () => {
   it('renders WebhooksList within Suspense', () => {
     const { container } = renderWithQuery(<Sidebar />)
     const sidebar = container.firstChild as HTMLElement
-    expect(sidebar).toHaveClass('flex', 'h-screen', 'flex-col')
+    expect(sidebar).toHaveClass('flex', 'h-full', 'flex-col', 'bg-zinc-950')
   })
 
   it('applies correct layout classes', () => {
     const { container } = renderWithQuery(<Sidebar />)
     const sidebar = container.firstChild as HTMLElement
-    expect(sidebar).toHaveClass('flex', 'h-screen', 'flex-col')
+    expect(sidebar).toHaveClass('flex', 'h-full', 'flex-col', 'bg-zinc-950')
   })
 
   it('applies border to header section', () => {

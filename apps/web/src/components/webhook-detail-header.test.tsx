@@ -43,7 +43,14 @@ describe('WebhookDetailHeader', () => {
   it('applies correct CSS classes to container', () => {
     const { container } = render(<WebhookDetailHeader {...defaultProps} />)
     const div = container.firstChild as HTMLElement
-    expect(div).toHaveClass('space-y-4', 'border-zinc-700', 'border-b', 'p-6')
+    expect(div).toHaveClass(
+      'space-y-3',
+      'border-zinc-700',
+      'border-b',
+      'p-4',
+      'md:space-y-4',
+      'md:p-6'
+    )
   })
 
   it('renders divider between method and pathname', () => {

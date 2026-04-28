@@ -35,7 +35,7 @@ describe('SectionDataTable', () => {
     const { container } = render(<SectionDataTable data={mockData} />)
     const table = container.querySelector('table')
     expect(table?.parentElement).toHaveClass(
-      'overflow-hidden',
+      'overflow-x-auto',
       'rounded-lg',
       'border',
       'border-zinc-700'

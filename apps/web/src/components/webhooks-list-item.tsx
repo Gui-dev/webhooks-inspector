@@ -15,9 +15,15 @@ interface IWebhooksListItemProps {
     pathname: string
     createdAt: Date
   }
+  onWebhookChecked: (webhookId: string) => void
+  isWebhookChecked: boolean
 }
 
-export const WebhooksListItem = ({ webhook }: IWebhooksListItemProps) => {
+export const WebhooksListItem = ({
+  webhook,
+  onWebhookChecked,
+  isWebhookChecked,
+}: IWebhooksListItemProps) => {
   const queryClient = useQueryClient()
   const { mutate: deleteWebhook } = useMutation({
     mutationFn: async (id: string) => {
@@ -37,7 +43,7 @@ export const WebhooksListItem = ({ webhook }: IWebhooksListItemProps) => {
       data-testid="webhook-item"
     >
       <div className="flex items-start gap-3 px-4 py-2.5">
-        <Checkbox />
+        <Checkbox onCheckedChange={() => onWebhookChecked(webhook.id)} checked={isWebhookChecked} />
         <Link
           to="/webhooks/$id"
           params={{ id: webhook.id }}
