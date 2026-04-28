@@ -30,10 +30,9 @@ describe('Sidebar', () => {
     )
   })
 
-  it('renders logo image', () => {
+  it('renders logo component', () => {
     renderWithQuery(<Sidebar />)
-    const logo = screen.getByAltText('logo')
-    expect(logo).toBeInTheDocument()
+    expect(screen.getByText(/webhooks/)).toBeInTheDocument()
   })
 
   it('renders capture URL', () => {
